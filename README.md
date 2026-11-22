@@ -103,3 +103,7 @@ src/HomeManagement.Api
 
 This is a local development project. The API has no authentication and the device emulator can
 start programs on the machine it runs on, so don't expose either of them to the internet.
+
+## Author
+
+Rodrigo Leytes, homework for the DataArt IT Camp .NET workshop.
