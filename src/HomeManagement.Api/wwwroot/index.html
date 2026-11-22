@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Home Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div>
+        <h1>Smart Home Dashboard</h1>
+        <p class="muted" id="last-update" aria-live="polite">Loading…</p>
+      </div>
+      <button type="button" class="btn" id="refresh-all">Refresh now</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="kpis" aria-label="Summary">
+      <div class="kpi kpi-online">
+        <span class="kpi-label">Online devices</span>
+        <span class="kpi-value"><span id="kpi-online">–</span><span class="kpi-of"> / <span id="kpi-total">–</span></span></span>
+      </div>
+      <div class="kpi kpi-offline">
+        <span class="kpi-label">Offline devices</span>
+        <span class="kpi-value" id="kpi-offline">–</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-label">Availability</span>
+        <span class="kpi-value" id="kpi-availability">–</span>
+      </div>
+    </section>
+
+    <div class="alert" id="error" role="alert" hidden></div>
+
+    <section aria-labelledby="devices-title">
+      <div class="section-head">
+        <h2 id="devices-title">Devices</h2>
+        <p class="muted" id="interval-note"></p>
+      </div>
+      <p class="empty" id="empty" hidden>No devices registered yet. Add one below.</p>
+      <div class="grid" id="devices"></div>
+    </section>
+
+    <section class="card add-card" aria-labelledby="add-title">
+      <h2 id="add-title">Add a device</h2>
+      <p class="muted">Paste the address of a device API, for example <code>https://localhost:1234</code>.</p>
+      <form id="add-form" class="add-form" novalidate>
+        <label class="field">
+          <span>Address</span>
+          <input name="address" type="url" placeholder="https://localhost:1234" required autocomplete="off">
+        </label>
+        <label class="field">
+          <span>Name <span class="muted">(optional)</span></span>
+          <input name="name" type="text" placeholder="Taken from the device if empty" autocomplete="off">
+        </label>
+        <button type="submit" class="btn btn-primary">Add device</button>
+      </form>
+      <p class="form-msg" id="add-msg" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <template id="device-template">
+    <article class="card device">
+      <div class="device-head">
+        <div>
+          <h3 class="device-name"></h3>
+          <p class="device-address muted"></p>
+        </div>
+        <span class="pill"></span>
+      </div>
+      <dl class="metrics"></dl>
+      <p class="seen muted"></p>
+      <div class="actions"></div>
+      <pre class="output" hidden></pre>
+      <div class="device-foot">
+        <button type="button" class="link" data-role="refresh">Check now</button>
+        <button type="button" class="link link-danger" data-role="remove">Remove</button>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
